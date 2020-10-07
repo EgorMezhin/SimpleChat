@@ -9,21 +9,27 @@
 /* Begin PBXBuildFile section */
 		D002EBAF252E60A400392943 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D002EBAE252E60A400392943 /* AppDelegate.swift */; };
 		D002EBB1252E60A400392943 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D002EBB0252E60A400392943 /* SceneDelegate.swift */; };
-		D002EBB3252E60A400392943 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D002EBB2252E60A400392943 /* ViewController.swift */; };
 		D002EBB6252E60A400392943 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D002EBB4252E60A400392943 /* Main.storyboard */; };
 		D002EBB8252E60A600392943 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D002EBB7252E60A600392943 /* Assets.xcassets */; };
 		D002EBBB252E60A600392943 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D002EBB9252E60A600392943 /* LaunchScreen.storyboard */; };
+		D002EBC7252E767F00392943 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D002EBC6252E767F00392943 /* WelcomeViewController.swift */; };
+		D002EBC9252E76B100392943 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D002EBC8252E76B100392943 /* RegistrationViewController.swift */; };
+		D002EBCB252E76C200392943 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D002EBCA252E76C200392943 /* LoginViewController.swift */; };
+		D002EBCD252E76CF00392943 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D002EBCC252E76CF00392943 /* ChatViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		D002EBAB252E60A400392943 /* SimpleChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D002EBAE252E60A400392943 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D002EBB0252E60A400392943 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		D002EBB2252E60A400392943 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		D002EBB5252E60A400392943 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D002EBB7252E60A600392943 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D002EBBA252E60A600392943 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D002EBBC252E60A600392943 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D002EBC6252E767F00392943 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+		D002EBC8252E76B100392943 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
+		D002EBCA252E76C200392943 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		D002EBCC252E76CF00392943 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +62,50 @@
 		D002EBAD252E60A400392943 /* SimpleChat */ = {
 			isa = PBXGroup;
 			children = (
-				D002EBAE252E60A400392943 /* AppDelegate.swift */,
-				D002EBB0252E60A400392943 /* SceneDelegate.swift */,
-				D002EBB2252E60A400392943 /* ViewController.swift */,
-				D002EBB4252E60A400392943 /* Main.storyboard */,
-				D002EBB7252E60A600392943 /* Assets.xcassets */,
-				D002EBB9252E60A600392943 /* LaunchScreen.storyboard */,
-				D002EBBC252E60A600392943 /* Info.plist */,
+				D002EBC2252E6CBD00392943 /* Model */,
+				D002EBC3252E6CC800392943 /* View */,
+				D002EBC4252E6CD100392943 /* Controller */,
+				D002EBC5252E6D1200392943 /* Supporting Files */,
 			);
 			path = SimpleChat;
+			sourceTree = "<group>";
+		};
+		D002EBC2252E6CBD00392943 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D002EBC3252E6CC800392943 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D002EBB4252E60A400392943 /* Main.storyboard */,
+				D002EBB9252E60A600392943 /* LaunchScreen.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D002EBC4252E6CD100392943 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D002EBC6252E767F00392943 /* WelcomeViewController.swift */,
+				D002EBC8252E76B100392943 /* RegistrationViewController.swift */,
+				D002EBCA252E76C200392943 /* LoginViewController.swift */,
+				D002EBCC252E76CF00392943 /* ChatViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		D002EBC5252E6D1200392943 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D002EBBC252E60A600392943 /* Info.plist */,
+				D002EBAE252E60A400392943 /* AppDelegate.swift */,
+				D002EBB0252E60A400392943 /* SceneDelegate.swift */,
+				D002EBB7252E60A600392943 /* Assets.xcassets */,
+			);
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,8 +179,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D002EBB3252E60A400392943 /* ViewController.swift in Sources */,
+				D002EBC7252E767F00392943 /* WelcomeViewController.swift in Sources */,
 				D002EBAF252E60A400392943 /* AppDelegate.swift in Sources */,
+				D002EBC9252E76B100392943 /* RegistrationViewController.swift in Sources */,
+				D002EBCB252E76C200392943 /* LoginViewController.swift in Sources */,
+				D002EBCD252E76CF00392943 /* ChatViewController.swift in Sources */,
 				D002EBB1252E60A400392943 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -286,7 +330,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YKJ7WX469T;
-				INFOPLIST_FILE = SimpleChat/Info.plist;
+				INFOPLIST_FILE = "SimpleChat/Supporting FIles/info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -304,7 +348,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YKJ7WX469T;
-				INFOPLIST_FILE = SimpleChat/Info.plist;
+				INFOPLIST_FILE = "SimpleChat/Supporting FIles/info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
