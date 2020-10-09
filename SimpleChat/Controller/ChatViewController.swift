@@ -15,7 +15,6 @@ class ChatViewController: UIViewController {
     @IBOutlet weak var messageField: UITextField!
     
     var db = Firestore.firestore()
-    
     var message: [Message] = []
     
     @IBAction func sendButtonPressed(_ sender: UIButton) {
@@ -30,6 +29,9 @@ class ChatViewController: UIViewController {
                     if let error = error {
                         print(error)
                     }
+                }
+                DispatchQueue.main.async {
+                    self.messageField.text = ""
                 }
             }
         } else {
@@ -55,13 +57,11 @@ class ChatViewController: UIViewController {
         tableView.allowsSelection = false
         tableView.register(UINib(nibName: "MessageTableViewCell", bundle: nil),
                            forCellReuseIdentifier: Constants.tableViewCellIdentifier)
-        
         loadMessages()
         
     }
     
     func loadMessages() {
-        
         db.collection(Constants.FStore.collectionName)
             .order(by: Constants.FStore.dateField)
             .addSnapshotListener { (querySnapshot, error) in
@@ -79,6 +79,8 @@ class ChatViewController: UIViewController {
                             
                             DispatchQueue.main.async {
                                  self.tableView.reloadData()
+                                let indexPath = IndexPath(row: self.message.count - 1, section: 0)
+                                self.tableView.scrollToRow(at: indexPath, at: .top, animated: false)
                             }
                         }
                     }
@@ -94,9 +96,21 @@ extension ChatViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let currentMessage = message[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.tableViewCellIdentifier,
                                                  for: indexPath) as! MessageTableViewCell
         cell.label.text = "\(message[indexPath.row].body)"
+        if currentMessage.sender == Auth.auth().currentUser?.email {
+            cell.leftImageView.isHidden = true
+            cell.rightImageView.isHidden = false
+            cell.messageView.backgroundColor = UIColor(named: Constants.BrandColors.lightPurple)
+            cell.label.textColor = UIColor(named: Constants.BrandColors.purple)
+        } else {
+            cell.rightImageView.isHidden = true
+            cell.leftImageView.isHidden = false
+            cell.messageView.backgroundColor = UIColor(named: Constants.BrandColors.purple)
+            cell.label.textColor = UIColor(named: Constants.BrandColors.lightPurple)
+        }
         return cell
     }
 }
