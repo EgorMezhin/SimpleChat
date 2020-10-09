@@ -16,23 +16,24 @@ class ChatViewController: UIViewController {
     
     var db = Firestore.firestore()
     
-    var message: [Message] = [
-        Message(sender: "1@b.com", body: "Hi"),
-        Message(sender: "2@g.com", body: "Hello"),
-        Message(sender: "1@b.com", body: "How are you?")
-    ]
+    var message: [Message] = []
     
     @IBAction func sendButtonPressed(_ sender: UIButton) {
-        if  let messageBody = messageField.text, let messageSender =
-            Auth.auth().currentUser?.email {
-            db.collection(Constants.FStore.collectionName).addDocument(data: [
-                Constants.FStore.senderField: messageSender,
-                Constants.FStore.bodyField: messageBody
+        if messageField.text != "" {
+            if  let messageBody = messageField.text, let messageSender =
+                Auth.auth().currentUser?.email {
+                db.collection(Constants.FStore.collectionName).addDocument(data: [
+                    Constants.FStore.senderField: messageSender,
+                    Constants.FStore.bodyField: messageBody,
+                    Constants.FStore.dateField: Date().timeIntervalSince1970
                 ]) { (error) in
                     if let error = error {
-                    print(error)
+                        print(error)
+                    }
                 }
             }
+        } else {
+            self.messageField.placeholder = "Type something"
         }
     }
     
@@ -54,6 +55,36 @@ class ChatViewController: UIViewController {
         tableView.allowsSelection = false
         tableView.register(UINib(nibName: "MessageTableViewCell", bundle: nil),
                            forCellReuseIdentifier: Constants.tableViewCellIdentifier)
+        
+        loadMessages()
+        
+    }
+    
+    func loadMessages() {
+        
+        db.collection(Constants.FStore.collectionName)
+            .order(by: Constants.FStore.dateField)
+            .addSnapshotListener { (querySnapshot, error) in
+            self.message = []
+            if let error = error {
+                print(error)
+            } else {
+                if let snapsshotDocument = querySnapshot?.documents {
+                    for document in snapsshotDocument {
+                        let data = document.data()
+                        if let sender = data[Constants.FStore.senderField] as? String,
+                            let messageBody = data[Constants.FStore.bodyField] as? String {
+                            let newMessage = Message(sender: sender, body: messageBody)
+                            self.message.append(newMessage)
+                            
+                            DispatchQueue.main.async {
+                                 self.tableView.reloadData()
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 
