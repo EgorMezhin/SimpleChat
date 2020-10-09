@@ -1,5 +1,5 @@
 //
-//  RegistrationViewController.swift
+//  LoginViewController.swift
 //  SimpleChat
 //
 //  Created by Egor Lass on 08.10.2020.
@@ -9,14 +9,14 @@
 import UIKit
 import Firebase
 
-class RegistrationViewController: UIViewController {
+class LoginViewController: UIViewController {
     
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
-    @IBAction func registerButtonPressed(_ sender: UIButton) {
+    @IBAction func loginButtonPressed(_ sender: UIButton) {
         if let email = emailTextField.text, let password = passwordTextField.text {
-            Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
+            Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
                 if let error = error {
                     let errorAlertController = UIAlertController(title: "Error",
                                                                  message: error.localizedDescription,
@@ -27,7 +27,7 @@ class RegistrationViewController: UIViewController {
                     self.present(errorAlertController, animated: true,
                                  completion: nil)
                 } else {
-                    self.performSegue(withIdentifier: Constants.registerSegueIdentifier,
+                    self.performSegue(withIdentifier: Constants.loginSegueIdentifier,
                                       sender: self)
                 }
             }
