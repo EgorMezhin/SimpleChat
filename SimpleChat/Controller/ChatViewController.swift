@@ -14,6 +14,8 @@ class ChatViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var messageField: UITextField!
     
+    var db = Firestore.firestore()
+    
     var message: [Message] = [
         Message(sender: "1@b.com", body: "Hi"),
         Message(sender: "2@g.com", body: "Hello"),
@@ -21,6 +23,17 @@ class ChatViewController: UIViewController {
     ]
     
     @IBAction func sendButtonPressed(_ sender: UIButton) {
+        if  let messageBody = messageField.text, let messageSender =
+            Auth.auth().currentUser?.email {
+            db.collection(Constants.FStore.collectionName).addDocument(data: [
+                Constants.FStore.senderField: messageSender,
+                Constants.FStore.bodyField: messageBody
+                ]) { (error) in
+                    if let error = error {
+                    print(error)
+                }
+            }
+        }
     }
     
     @IBAction func LogOutBarButtonPressed(_ sender: UIBarButtonItem) {
@@ -39,7 +52,8 @@ class ChatViewController: UIViewController {
         title = Constants.appTitle
         navigationItem.hidesBackButton = true
         tableView.allowsSelection = false
-        tableView.register(UINib(nibName: "MessageTableViewCell", bundle: nil), forCellReuseIdentifier: "ReusableCell")
+        tableView.register(UINib(nibName: "MessageTableViewCell", bundle: nil),
+                           forCellReuseIdentifier: Constants.tableViewCellIdentifier)
     }
 }
 
@@ -49,7 +63,8 @@ extension ChatViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.tableViewCellIdentifier, for: indexPath) as! MessageTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.tableViewCellIdentifier,
+                                                 for: indexPath) as! MessageTableViewCell
         cell.label.text = "\(message[indexPath.row].body)"
         return cell
     }
