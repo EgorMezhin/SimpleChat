@@ -58,7 +58,6 @@ class ChatViewController: UIViewController {
         tableView.register(UINib(nibName: "MessageTableViewCell", bundle: nil),
                            forCellReuseIdentifier: Constants.tableViewCellIdentifier)
         loadMessages()
-        
     }
     
     func loadMessages() {
